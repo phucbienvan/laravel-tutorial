@@ -54,11 +54,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-//        dd($post->id);
-//        $post = Post::where('id', $post->id)->first();
-//        dd($post);
-
-        return view('post-detail', compact('post'));
+        return view('post-detail', ['post' => $post]);
     }
 
     /**
