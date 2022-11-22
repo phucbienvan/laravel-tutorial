@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index']);
+Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index'])->name('post.index');
 Route::get('posts/{post}/show', [\App\Http\Controllers\PostController::class, 'show'])->name('post.show')->middleware('bindings');
+Route::get('post-create', [\App\Http\Controllers\PostController::class, 'create'])->name('post.create');
+Route::post('posts', [\App\Http\Controllers\PostController::class, 'store'])->name('post.store');
 
