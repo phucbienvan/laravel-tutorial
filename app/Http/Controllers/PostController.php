@@ -32,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post-create');
     }
 
     /**
@@ -43,21 +43,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+        if($this->postService->store($request)) {
+            return redirect()->route('post.index');
+        }
+        return dd("error");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
     {
-//        dd($post->id);
-//        $post = Post::where('id', $post->id)->first();
-//        dd($post);
-
         return view('post-detail', compact('post'));
     }
 

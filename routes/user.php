@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index']);
-Route::get('posts/{id}', [\App\Http\Controllers\PostController::class, 'show'])->name('post.show');
+Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+Route::get('/posts/detail/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+Route::post('/posts/store', [PostController::class, 'store'])->name('post.store');
 

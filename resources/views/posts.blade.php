@@ -7,3 +7,9 @@
     </tr>
     @endforeach
 </table>
+
+
+<div>
+    <h1>Create</h1>
+    <a href="{{route('post.create')}}">create new post</a>
+</div>
