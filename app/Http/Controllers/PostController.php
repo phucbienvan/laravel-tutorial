@@ -32,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('create-post');
     }
 
     /**
@@ -43,7 +43,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+        $post = new Post();
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->save();
+        return redirect()->route('post.index')->with('message', 'Create post successfully');
     }
 
     /**
@@ -54,10 +58,6 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-//        dd($post->id);
-//        $post = Post::where('id', $post->id)->first();
-//        dd($post);
-
         return view('post-detail', compact('post'));
     }
 
