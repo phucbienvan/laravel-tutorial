@@ -5,6 +5,8 @@ namespace App\Services;
 
 
 use App\Models\Post;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class PostService
 {
@@ -20,8 +22,16 @@ class PostService
         return $posts;
     }
 
-    function store($request)
+    function insertPost($request)
     {
+        try {
+            $this->post::create($request);
 
+            return true;
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return false;
+        }
     }
 }

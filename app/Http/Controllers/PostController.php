@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\Request;
@@ -41,13 +42,33 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        Post::create([
-            'title' => $request['title'],
-            'description' => $request['description']
+        // $post = Post::create([
+        //     'title' => $request['title'],
+        //     'description' => $request['description']
+        // ]);
+
+        // if ($post) {
+        //     return redirect()->back()->with([
+        //         'success' => 'created post success'
+        //     ]);
+
+        // }
+
+        // return redirect()->back()->with([
+        //     'fail' => 'created post Fail'
+        // ]);
+
+        if ($this->postService->insertPost($request->all())) {
+            return redirect()->back()->with([
+                'success' => 'created post success'
+            ]);           
+        }
+
+        return redirect()->back()->with([
+            'fail' => 'created post Fail'
         ]);
-        return redirect()->route('post.index');
     }
 
     /**
