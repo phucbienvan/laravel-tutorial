@@ -90,7 +90,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('post-edit', compact('post'));
     }
 
     /**
@@ -100,9 +101,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, $id)
     {
-        //
+        if ($this->postService->updatePost($request, $id)) {
+            return redirect()->back()->with([
+                'success' => 'update post success'
+            ]);           
+        }
+
+        return redirect()->back()->with([
+            'fail' => 'update post Fail'
+        ]);
     }
 
     /**
