@@ -34,4 +34,18 @@ class PostService
             return false;
         }
     }
+
+    function updatePost($request, $id) {
+        try {
+            $this->post = Post::find($id);
+            $this->post->title = $request->title;
+            $this->post->description = $request->description;
+            $this->post->save();
+            return true;
+        } catch (Exception $e) {
+            Log::error($e);
+
+            return false;
+        }
+    }
 }
