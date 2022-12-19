@@ -19,6 +19,7 @@ Route::get('/register', [AuthenController::class, 'getFormRegister']);
 Route::post('/register', [AuthenController::class, 'register'])->name('register');
 Route::get('/login', [AuthenController::class, 'getFormLogin']);
 Route::post('/login', [AuthenController::class, 'login'])->name('login');
+Route::get('/logout', [AuthenController::class, 'logout'])->name('logout');
 
 Route::group(["middleware" => "userLogin"], function (){
     Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index'])->name('post.index');
@@ -28,4 +29,3 @@ Route::group(["middleware" => "userLogin"], function (){
     Route::get('posts/edit/{id}', [\App\Http\Controllers\PostController::class, 'edit'])->name('post.edit');
     Route::post('posts/update/{id}', [\App\Http\Controllers\PostController::class, 'update'])->name('post.update');
 });
-
